@@ -42,12 +42,15 @@ AppAsset::register($this);
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
 
-                ['label' => 'Libros', 'url' => ['/libro/index']],
+                // Si no es usuario publico mostrar libros, es decir , si esta logueado
+                (!Yii::$app->user->isGuest) ? (['label' => 'Libros', 'url' => ['/libro/index']])
+                    : (''),
 
 
                 ['label' => 'Aplicacion', 'url' => ['/sitio/inicio']],
                 ['label' => 'About', 'url' => ['/site/about']],
                 ['label' => 'Contact', 'url' => ['/site/contact']],
+                // si es usuario publico mostramos loguin
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
