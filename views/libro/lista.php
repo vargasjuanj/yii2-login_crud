@@ -13,7 +13,7 @@ use yii\widgets\LinkPager;
 
     <?php foreach ($libros as $libro) : ?>
 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <a href="#" class="thumbnail">
                 <?= Html::img($libro->imagen); ?>
                 <?= Html::encode("{$libro->titulo}") ?>

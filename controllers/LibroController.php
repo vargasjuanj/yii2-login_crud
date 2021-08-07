@@ -27,6 +27,8 @@ class LibroController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                //bloquear ciertas vistas o accesos, que solo el usaurio logueado puede ver o acceder
+                'only'=>['index','view','create','update','delete'],
                 'rules' => [
                     [
                         //Permitir el acceso a todos los logueados
