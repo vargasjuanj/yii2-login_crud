@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 
 
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * LibroController implements the CRUD actions for Libro model.
@@ -23,6 +24,16 @@ class LibroController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //Permitir el acceso a todos los logueados
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -142,7 +153,7 @@ class LibroController extends Controller
             if ($model->validate()) {
                 //valido que exista el archivo en el input
                 if ($model->archivo) {
-                    
+
                     if (file_exists($model->imagen)) {
                         unlink($model->imagen);
                     }
