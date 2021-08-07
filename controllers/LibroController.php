@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
+use yii\data\Pagination;
 
 /**
  * LibroController implements the CRUD actions for Libro model.
@@ -126,6 +127,24 @@ class LibroController extends Controller
 
         return $this->redirect(['index']);
     }
+
+
+    public function actionLista()
+    {
+        $model = Libro::find();
+
+        $paginacion = new Pagination([
+            'defaultPageSize'=>4,
+            'totalCount'=>$model->count()
+        ]);
+//offset es el rango que se va a cubrir
+        $libros = $model->orderBy('titulo')->offset($paginacion->offset)->limit($paginacion->limit)->all();
+
+        return $this->render('lista',['libros'=>$libros,'paginacion'=>$paginacion]);
+    }
+
+
+
 
     /**
      * Finds the Libro model based on its primary key value.
